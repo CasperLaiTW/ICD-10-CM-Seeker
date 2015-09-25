@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.babel.js",
     "build": "npm run clean && npm run build:webpack",
-    "start": "babel-node devServer.js",
+    "start": "node -r babel/register devServer.js",
     "lint": "eslint src"
   },
   "author": "Casper Lai",
