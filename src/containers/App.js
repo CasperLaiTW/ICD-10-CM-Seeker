@@ -1,10 +1,14 @@
 import React from 'react';
+import { Header } from '../components/';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 
 export default class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>App</h1>
+        <Header />
         {this.props.children}
       </div>
     );
