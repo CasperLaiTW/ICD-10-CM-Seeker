@@ -1,5 +1,5 @@
-import path from 'path';
 import webpack from 'webpack';
+import config from './webpack.config.base';
 
 const settings = {
   devtool: 'eval',
@@ -7,11 +7,7 @@ const settings = {
     'webpack-hot-middleware/client',
     './src/index'
   ],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
-  },
+  output: config.output,
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
@@ -20,11 +16,7 @@ const settings = {
     }),
   ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    }]
+    loaders: config.loaders,
   }
 }
 
