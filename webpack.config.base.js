@@ -7,7 +7,7 @@ export default {
     publicPath: '/static/'
   },
   loaders: [
-    { test: /\.js$/, loader: 'babel', query: { compact: false } },
+    { test: /\.js$/, loader: 'babel', query: { compact: false, stage: 0 } },
     { test: /\.css$/, loaders: ['style', 'css', 'cssnext'] },
     { test: /\.svg$/, loader: "file-loader" },
     { test: /\.woff2?$/, loader: 'url-loader' },
