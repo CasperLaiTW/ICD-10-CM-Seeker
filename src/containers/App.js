@@ -1,10 +1,13 @@
 import React from 'react';
+
 import { Header } from '../components/';
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-
 export default class App extends React.Component {
+
+  constructor(props, context) {
+    super(props, context);
+  }
+
   render() {
     return (
       <div>
