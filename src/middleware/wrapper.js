@@ -2,7 +2,6 @@ import * as ICDConstants from '../constants/ICDConstants';
 import * as MenuConstants from '../constants/MenuConstants';
 
 export default store => next => action => {
-  console.log(action.type);
   if (action.type === ICDConstants.DATA_UPDATE ) {
     store.dispatch({
       type: MenuConstants.DATA_UPDATE,
