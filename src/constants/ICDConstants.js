@@ -1,0 +1,1 @@
+export const DATA_LOADED = 'ICD_DATA_LOADED';
