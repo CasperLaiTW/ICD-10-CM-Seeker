@@ -1,1 +1,1 @@
-export const DATA_LOADED = 'ICD_DATA_LOADED';
+export const DATA_UPDATE = 'ICD_DATA_UPDATE';
