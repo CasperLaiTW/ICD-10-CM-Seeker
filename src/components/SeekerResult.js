@@ -37,8 +37,8 @@ export default class SeekerResult extends React.Component {
   _wrapper() {
     const { result } = this.props;
     let tbody = [];
-    result.forEach((value, key) => {
-      tbody.push(
+    tbody = result.map((value, key) => {
+      return (
         <tr key={key}>
           <td>{value.code}</td>
           <td>{value.content}</td>
@@ -49,7 +49,7 @@ export default class SeekerResult extends React.Component {
           <td>{value.medical}</td>
         </tr>
       );
-    });
+    })
     return tbody;
   }
 }
