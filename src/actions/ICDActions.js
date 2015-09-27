@@ -27,3 +27,11 @@ export function undo(key) {
     icd: ICDTen
   };
 }
+
+export function reset() {
+  ICDTen.reset();
+  return {
+    type: ICDConstants.DATA_UPDATE,
+    icd: ICDTen
+  }
+}

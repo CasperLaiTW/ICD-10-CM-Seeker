@@ -46,6 +46,13 @@ export default class SeekerMenu extends React.Component {
     );
   }
 
+  reset() {
+    this.setState({
+      value: undefined,
+      current: undefined,
+    });
+  }
+
   _wrapper() {
     const { current } = this.state;
     const { items, disabled } = this._getListState();
@@ -84,10 +91,7 @@ export default class SeekerMenu extends React.Component {
   }
 
   _handleReset() {
-    this.setState({
-      value: undefined,
-      current: undefined,
-    });
+    this.reset();
     this.props.undo(this.props.filterKey);
   }
 
