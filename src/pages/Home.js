@@ -18,7 +18,7 @@ class Home extends React.Component {
     const { menus, ICD } = this.props;
     return (
       <div>
-        <Seeker menus={menus} icd={ICD} />
+        <Seeker />
       </div>
     );
   }
