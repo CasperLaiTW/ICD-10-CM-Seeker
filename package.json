@@ -1,7 +1,8 @@
 {
-  "name": "react-icd-10-cm-application",
+  "name": "ICD-10-CM-Seeker",
   "version": "0.1.0",
-  "description": "React component for ICD-10-cm",
+  "description": "ICD-10-CM seeker",
+  "repository": "https://github.com/CasperLaiTW/ICD-10-CM-Seeker",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
