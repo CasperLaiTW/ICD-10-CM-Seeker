@@ -1,7 +1,6 @@
 import { ICDTen } from 'icd-10-cm-core';
 import _ from 'lodash';
 import * as ICDConstants from '../constants/ICDConstants';
-import * as MenuConstants from '../constants/MenuConstants';
 
 export function loadRepo() {
   return {
@@ -9,7 +8,6 @@ export function loadRepo() {
     icd: ICDTen
   };
 }
-
 
 export function filter(key, value) {
   const functionName = 'set' + _.capitalize(key);
@@ -19,5 +17,13 @@ export function filter(key, value) {
   return {
     type:ICDConstants.DATA_UPDATE,
     icd: ICDTen,
+  };
+}
+
+export function undo(key) {
+  ICDTen.undo(key);
+  return {
+    type: ICDConstants.DATA_UPDATE,
+    icd: ICDTen
   };
 }
