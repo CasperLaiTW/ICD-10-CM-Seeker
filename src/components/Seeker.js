@@ -47,6 +47,10 @@ class Seeker extends React.Component {
     );
   }
 
+  /**
+   * Get component styles.
+   * @return {Object}
+   */
   _getStyles() {
     return {
       menuContainer: {
@@ -63,6 +67,10 @@ class Seeker extends React.Component {
     }
   }
 
+  /**
+   * Reset all filter.
+   * @return {void}
+   */
   _resetAll() {
     _.each(_.filter(this._menus, (menu) => menu !== null), (menu) => {
       menu.reset();
@@ -70,6 +78,11 @@ class Seeker extends React.Component {
     this.props.dispatch(ICDActions.reset());
   }
 
+  /**
+   * Callback of ref menu.
+   * @param  {ReactDOM} [menu] Menu component.
+   * @return {ReactDOM}
+   */
   _refMenu(menu) {
     if (!_.includes(this._menus, menu)) {
       this._menus.push(menu);
@@ -77,6 +90,10 @@ class Seeker extends React.Component {
     return menu;
   }
 
+  /**
+   * Menu wrapper.
+   * @return {array} Array of menus component.
+   */
   _wrapperMenu() {
     const { menus, dispatch } = this.props;
     const actionCreators = bindActionCreators(ICDActions, dispatch);

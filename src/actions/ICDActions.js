@@ -2,6 +2,10 @@ import { ICDTen } from 'icd-10-cm-core';
 import _ from 'lodash';
 import * as ICDConstants from '../constants/ICDConstants';
 
+/**
+ * Load ICD-10-CM json data.
+ * @return {dispatch}
+ */
 export function loadRepo() {
   return {
     type: ICDConstants.DATA_UPDATE,
@@ -9,6 +13,12 @@ export function loadRepo() {
   };
 }
 
+/**
+ * Filter condition.
+ * @param  {string} [key]   Name of condition.
+ * @param  {any} [value]  Value of condition.
+ * @return {dispatch}
+ */
 export function filter(key, value) {
   const functionName = 'set' + _.capitalize(key);
   const func = ICDTen[functionName];
@@ -20,6 +30,11 @@ export function filter(key, value) {
   };
 }
 
+/**
+ * Undo the filter.
+ * @param  {string} [key] Name of condition.
+ * @return {dispatch}
+ */
 export function undo(key) {
   ICDTen.undo(key);
   return {
@@ -28,6 +43,10 @@ export function undo(key) {
   };
 }
 
+/**
+ * Reset filter.
+ * @return {dispatch}
+ */
 export function reset() {
   ICDTen.reset();
   return {

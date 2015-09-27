@@ -34,6 +34,10 @@ export default class SeekerResult extends React.Component {
     );
   }
 
+  /**
+   * Table content wrapper.
+   * @return {array} ReactDOM of table content.
+   */
   _wrapper() {
     const { result } = this.props;
     let tbody = [];

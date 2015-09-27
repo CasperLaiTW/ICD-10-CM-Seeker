@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   ...reducers
 });
 
-// Configure the dev tools when in DEV mode
+// Configure the dev tools when in DEV mode.
 if (__DEV__) {
   const createHistory = require('history/lib/createBrowserHistory');
   const {devTools, persistState} = require('redux-devtools');
@@ -31,8 +31,11 @@ if (__DEV__) {
   )(createStore);
 }
 
-
-
+/**
+ * Configure redux store.
+ * @param  {any} [initialState] The initial state.
+ * @return {Store}
+ */
 export default function configureStore(initialState) {
   return createStoreWithMiddleware(rootReducer, initialState);
 }

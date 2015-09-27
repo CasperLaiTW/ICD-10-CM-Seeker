@@ -48,6 +48,10 @@ export default class SeekerMenu extends React.Component {
     );
   }
 
+  /**
+   * Reset filter.
+   * @return {void}
+   */
   reset() {
     this.setState({
       value: undefined,
@@ -55,6 +59,10 @@ export default class SeekerMenu extends React.Component {
     });
   }
 
+  /**
+   * Filter item wrapper.
+   * @return {ReactDOM}
+   */
   _wrapper() {
     const { current } = this.state;
     const { items, disabled } = this._getListState();
@@ -79,6 +87,10 @@ export default class SeekerMenu extends React.Component {
     );
   }
 
+  /**
+   * Get filter items' state.
+   * @return {Object} Include item name and item's enable or disable.
+   */
   _getListState() {
     const { list } = this.state;
     let items = [];
@@ -92,11 +104,20 @@ export default class SeekerMenu extends React.Component {
     return {items: items, disabled: disabled};
   }
 
+  /**
+   * Handle reset filter
+   * @return {void}
+   */
   _handleReset() {
     this.reset();
     this.props.undo(this.props.filterKey);
   }
 
+  /**
+   * Handle list on change
+   * @param  {integer} [select] The list selected index.
+   * @return {void}
+   */
   _onChange(select) {
     const { filterKey, filter } = this.props;
     const { list } = this.state;
