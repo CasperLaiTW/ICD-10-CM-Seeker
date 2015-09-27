@@ -1,1 +1,0 @@
-export const DATA_UPDATE = 'ICD_DATA_UPDATE';
