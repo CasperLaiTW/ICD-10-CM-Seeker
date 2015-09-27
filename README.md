@@ -4,7 +4,7 @@ The ICD-10-CM Seeker is a web application that searching ICD-10 code.
 
 ## Demo
 
-[http://casperlaitw.github.io/ICD-10-CM-Seeker/#/?_k=pg0syw](http://casperlaitw.github.io/ICD-10-CM-Seeker/#/?_k=pg0syw)
+[http://casperlaitw.github.io/ICD-10-CM-Seeker](http://casperlaitw.github.io/ICD-10-CM-Seeker)
 
 ## Requirement
 
