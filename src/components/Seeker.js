@@ -22,7 +22,7 @@ class Seeker extends React.Component {
 
   _wrapperMenu() {
     const { menus, dispatch } = this.props;
-    const filter = bindActionCreators(ICDActions.filter, dispatch);
+    const actionCreators = bindActionCreators(ICDActions, dispatch);
     const items = [
       {
         key: 'medical',
@@ -53,7 +53,7 @@ class Seeker extends React.Component {
             filterKey={item.key}
             label={item.label}
             list={menus.get(item.key)}
-            filter={filter}
+            {...actionCreators}
           />
         </Col>
       );
