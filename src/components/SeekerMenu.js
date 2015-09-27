@@ -25,9 +25,11 @@ export default class SeekerMenu extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      list: nextProps.list.sortBy(v => !v.enabled),
-    });
+    if (nextProps.list !== undefined) {
+      this.setState({
+        list: nextProps.list.sortBy(v => !v.enabled),
+      });
+    }
   }
 
   render() {
