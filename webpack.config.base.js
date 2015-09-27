@@ -4,7 +4,7 @@ export default {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/dist/'
   },
   loaders: [
     { test: /\.js$/, loader: 'babel', query: { compact: false, stage: 0 } },
