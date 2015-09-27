@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
 import SeekerMenu from './SeekerMenu';
+import SeekerResult from './SeekerResult';
 
 import * as ICDActions from '../actions/ICDActions';
 
@@ -19,7 +20,7 @@ class Seeker extends React.Component {
     super(props, context);
   }
 
-  wrapperMenu() {
+  _wrapperMenu() {
     const { menus, dispatch } = this.props;
     const filter = bindActionCreators(ICDActions.filter, dispatch);
     const items = [
@@ -46,7 +47,7 @@ class Seeker extends React.Component {
     ];
     const wrapper = _.map(items, (item, key) => {
       return (
-        <Col xs={12} md={6} lg={2} key={key}>
+        <Col key={key}>
           <SeekerMenu
             key={item.key}
             filterKey={item.key}
@@ -65,10 +66,30 @@ class Seeker extends React.Component {
     return (
       <Grid>
         <Row>
-          {this.wrapperMenu()}
+          <Col lg={4} style={this._getStyles().menuContainer}>
+            {this._wrapperMenu()}
+          </Col>
+          <Col lg={8} style={this._getStyles().resultContainer}>
+            <SeekerResult
+              result={this.props.ICD}
+            />
+          </Col>
         </Row>
       </Grid>
     );
+  }
+
+  _getStyles() {
+    return {
+      menuContainer: {
+        height: 'calc(100vh - 75px)',
+        overflow: 'auto',
+      },
+      resultContainer: {
+        height: 'calc(100vh - 75px)',
+        overflow: 'auto',
+      }
+    }
   }
 }
 
