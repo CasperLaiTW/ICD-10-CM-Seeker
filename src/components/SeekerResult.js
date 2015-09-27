@@ -14,22 +14,24 @@ export default class SeekerResult extends React.Component {
   render() {
     return (
       <Panel header="搜尋結果" eventKey="1">
-        <Table striped condensed hover responsive>
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>名稱</th>
-              <th>當事人(傷者)用路型態</th>
-              <th>當事人(傷者)用路型態細分</th>
-              <th>對方用路型態</th>
-              <th>事故類型</th>
-              <th>就醫情況</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this._wrapper()}
-          </tbody>
-        </Table>
+        <div style={this._getStyles().resultContainer}>
+          <Table striped condensed hover responsive>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>名稱</th>
+                <th>當事人(傷者)用路型態</th>
+                <th>當事人(傷者)用路型態細分</th>
+                <th>對方用路型態</th>
+                <th>事故類型</th>
+                <th>就醫情況</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this._wrapper()}
+            </tbody>
+          </Table>
+        </div>
       </Panel>
     );
   }
@@ -55,5 +57,14 @@ export default class SeekerResult extends React.Component {
       );
     })
     return tbody;
+  }
+
+  _getStyles() {
+    return {
+      resultContainer: {
+        height: 'calc(100vh - 170px)',
+        overflow: 'auto',
+      }
+    };
   }
 }

@@ -37,7 +37,7 @@ class Seeker extends React.Component {
               {this._wrapperMenu()}
             </Row>
           </Col>
-          <Col lg={8} style={this._getStyles().resultContainer}>
+          <Col lg={8}>
             <SeekerResult
               result={this.props.ICD}
             />
@@ -54,16 +54,12 @@ class Seeker extends React.Component {
   _getStyles() {
     return {
       menuContainer: {
-        height: 'calc(100vh - 75px)',
+        height: 'calc(100vh - 150px)',
         overflow: 'auto',
       },
       resetContainer: {
         marginBottom: '1em',
       },
-      resultContainer: {
-        height: 'calc(100vh - 75px)',
-        overflow: 'auto',
-      }
     }
   }
 
