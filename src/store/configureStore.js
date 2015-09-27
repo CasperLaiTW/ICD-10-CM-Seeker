@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { routerStateReducer, reduxReactRouter } from 'redux-router';
-import createHistory from 'history/lib/createBrowserHistory';
 import thunkMiddleware from 'redux-thunk';
 
 import wrapperMiddleware from '../middleware/wrapper';
@@ -16,6 +15,7 @@ const rootReducer = combineReducers({
 
 // Configure the dev tools when in DEV mode
 if (__DEV__) {
+  const createHistory = require('history/lib/createBrowserHistory');
   const {devTools, persistState} = require('redux-devtools');
   createStoreWithMiddleware = compose(
     reduxReactRouter({ routes, createHistory: createHistory }),
@@ -24,6 +24,7 @@ if (__DEV__) {
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
   )(createStore);
 } else {
+  const createHistory = require('history/lib/createHashHistory');
   createStoreWithMiddleware = compose(
     reduxReactRouter({ routes, createHistory: createHistory }),
     applyMiddleware(wrapperMiddleware, thunkMiddleware)
