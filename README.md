@@ -22,3 +22,8 @@ After cloning the repo, do this so check it out:
     npm start
     open http://localhost:3000
 ```
+
+## Packages Dependencies
+
+* [icd-10-cm-core](https://github.com/CasperLaiTW/icd-10-cm-core)
+* [icd-10-cm-parser](https://github.com/CasperLaiTW/icd-10-cm-parser)
