@@ -18,17 +18,25 @@ export default class SeekerMenu extends React.Component {
 
   constructor(props, context) {
     super(props, context);
+    const list = this.props.list.sortBy(v => !v.enabled);
+    const {items, disabled} = this._getListState(list);
     this.state = {
-      list: this.props.list,
+      list: list,
+      menu: items,
       value: undefined,
       current: undefined,
+      disabled: disabled,
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.list !== undefined) {
+      const list = nextProps.list.sortBy(v => !v.enabled);
+      const {items, disabled} = this._getListState(list);
       this.setState({
-        list: nextProps.list.sortBy(v => !v.enabled),
+        list: list,
+        menu: items,
+        disabled: disabled,
       });
     }
   }
@@ -67,10 +75,10 @@ export default class SeekerMenu extends React.Component {
    */
   _wrapper() {
     const { current } = this.state;
-    const { items, disabled } = this._getListState();
+    const { menu, disabled } = this.state;
     if (_.isEmpty(current)) {
       return (<List
-          items={items}
+          items={menu}
           disabled={disabled}
           onChange={this._onChange.bind(this)}
         />
@@ -93,17 +101,19 @@ export default class SeekerMenu extends React.Component {
    * Get filter items' state.
    * @return {Object} Include item name and item's enable or disable.
    */
-  _getListState() {
-    const { list } = this.state;
+  _getListState(list) {
     let items = [];
+    let disabledIndex = [];
     let disabled = [];
-    list.forEach((value, key) => {
-      items.push(value.name);
+    _.each(list.toObject(), (value, key) => {
       if (!value.enabled) {
-        disabled.push(items.length - 1);
+        disabled.push(value.name);
+      } else {
+        items.push(value.name);
       }
     });
-    return {items: items, disabled: disabled};
+    disabledIndex = _.range(items.length, items.length + disabled.length);
+    return {items: items.concat(disabled), disabled: disabledIndex};
   }
 
   /**
@@ -122,12 +132,13 @@ export default class SeekerMenu extends React.Component {
    */
   _onChange(select) {
     const { filterKey, filter } = this.props;
-    const { list } = this.state;
-    const current = list.skip(select).take(1).toObject();
-    const value = _.first(_.keys(current));
+    const { menu, list } = this.state;
+    // console.log(list);
+    const current = list.find((v) => v.name === menu[select]);
+    const value = list.findKey((v) => v.name === menu[select]);
     this.setState({
       value: value,
-      current: current[value],
+      current: current,
     });
     filter(filterKey, value);
   }
