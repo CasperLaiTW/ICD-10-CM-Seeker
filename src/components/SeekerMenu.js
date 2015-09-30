@@ -13,6 +13,7 @@ export default class SeekerMenu extends React.Component {
     filter: PropTypes.func.isRequired,
     undo: PropTypes.func.isRequired,
     filterKey: PropTypes.string.isRequired,
+    bsStyle: PropTypes.string,
   }
 
   constructor(props, context) {
@@ -42,6 +43,7 @@ export default class SeekerMenu extends React.Component {
     return (
       <Panel
         header={label}
+        bsStyle={this.props.bsStyle ? this.props.bsStyle : 'default'}
       >
         {this._wrapper()}
       </Panel>

@@ -97,22 +97,27 @@ class Seeker extends React.Component {
       {
         key: 'medical',
         label: '就醫情況',
+        bsStyle: 'primary',
       },
       {
         key: 'pedestrian',
         label: '當事人（傷者）用路型態',
+        bsStyle: 'success',
       },
       {
         key: 'pedestrianDetail',
         label: '當事人（傷者）用路型態細分',
+        bsStyle: 'info',
       },
       {
         key: 'perpetrator',
         label: '對方用路型態',
+        bsStyle: 'warning',
       },
       {
         key: 'accidentType',
         label: '事故類型',
+        bsStyle: 'danger',
       }
     ];
     const wrapper = _.map(items, (item, key) => {
@@ -124,6 +129,7 @@ class Seeker extends React.Component {
             filterKey={item.key}
             label={item.label}
             list={menus.get(item.key)}
+            bsStyle={item.bsStyle}
             {...actionCreators}
           />
         </Col>
