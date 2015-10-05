@@ -1,4 +1,4 @@
-import { ICDTen } from 'icd-10-cm-core';
+import Core from 'icd-10-cm-core/dist/bundle';
 import _ from 'lodash';
 import * as ICDConstants from '../constants/ICDConstants';
 
@@ -6,10 +6,10 @@ import * as ICDConstants from '../constants/ICDConstants';
  * Load ICD-10-CM json data.
  * @return {dispatch}
  */
-export function loadRepo() {
+export function loadRepo(root) {
   return {
     type: ICDConstants.DATA_UPDATE,
-    icd: ICDTen
+    icd: Core
   };
 }
 
@@ -21,12 +21,12 @@ export function loadRepo() {
  */
 export function filter(key, value) {
   const functionName = 'set' + _.capitalize(key);
-  const func = ICDTen[functionName];
-  if (typeof func === 'function') func.call(ICDTen, value);
+  const func = Core[functionName];
+  if (typeof func === 'function') func.call(Core, value);
 
   return {
     type:ICDConstants.DATA_UPDATE,
-    icd: ICDTen,
+    icd: Core,
   };
 }
 
@@ -36,10 +36,10 @@ export function filter(key, value) {
  * @return {dispatch}
  */
 export function undo(key) {
-  ICDTen.undo(key);
+  Core.undo(key);
   return {
     type: ICDConstants.DATA_UPDATE,
-    icd: ICDTen
+    icd: Core
   };
 }
 
@@ -48,9 +48,9 @@ export function undo(key) {
  * @return {dispatch}
  */
 export function reset() {
-  ICDTen.reset();
+  Core.reset();
   return {
     type: ICDConstants.DATA_UPDATE,
-    icd: ICDTen
+    icd: Core
   }
 }

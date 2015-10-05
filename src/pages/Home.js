@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { loadRepo } from '../actions/ICDActions';
+import { loadRoot } from '../actions/RootActions';
 import { Seeker } from '../components/';
 
 class Home extends React.Component {
@@ -11,11 +11,10 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    this.props.loadRepo();
+    this.props.loadRoot();
   }
 
   render() {
-    const { menus, ICD } = this.props;
     return (
       <div>
         <Seeker />
@@ -24,4 +23,4 @@ class Home extends React.Component {
   }
 }
 
-export default connect((state) => ({menus: state.menus, ICD:state.ICD}), { loadRepo })(Home);
+export default connect((state) => ({root: state.root}), { loadRoot })(Home);
