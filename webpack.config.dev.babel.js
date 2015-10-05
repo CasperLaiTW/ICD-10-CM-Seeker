@@ -14,6 +14,9 @@ const settings = {
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(true),
     }),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    }),
   ],
   module: {
     loaders: config.loaders,
