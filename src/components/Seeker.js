@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Button, Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
@@ -14,20 +14,40 @@ class Seeker extends React.Component {
 
   static propTypes = {
     menus: PropTypes.object.isRequired,
-    ICD: PropTypes.object.isRequired
+    ICD: PropTypes.object.isRequired,
   }
 
   constructor(props, context) {
     super(props, context);
     this._menus = [];
+    this.state = {
+      root: undefined
+    };
+  }
+
+  _onRootChange(e) {
+    const { value } = e.target;
+    this.setState({
+      root: value,
+    });
+    this.props.dispatch(ICDActions.loadRepo(value));
   }
 
   render() {
-    const { menus } = this.props;
     return (
       <Grid>
         <Row>
           <Col lg={4}>
+            <Row>
+              <Panel
+                header="選擇傷害分類"
+              >
+                <select value={this.state.root} onChange={this._onRootChange.bind(this)}>
+                  <option value="">請選擇</option>
+                  {_.map(this.props.root, ((value, key) => <option key={key} value={key}>{key}</option>))}
+                </select>
+              </Panel>
+            </Row>
             <Row style={this._getStyles().resetContainer}>
               <Button onClick={this._resetAll.bind(this)}>
                 重設全部項目
@@ -38,9 +58,7 @@ class Seeker extends React.Component {
             </Row>
           </Col>
           <Col lg={8}>
-            <SeekerResult
-              result={this.props.ICD}
-            />
+            {this._wrapperResult()}
           </Col>
         </Row>
       </Grid>
@@ -86,40 +104,46 @@ class Seeker extends React.Component {
     return menu;
   }
 
+  _wrapperResult() {
+    const { menus, dispatch, menuLists } = this.props;
+    if (_.isEmpty(menuLists)) {
+      return null;
+    }
+
+    return (
+      <SeekerResult
+        result={this.props.ICD}
+        menuLists={menuLists}
+      />
+    );
+  }
+
   /**
    * Menu wrapper.
    * @return {array} Array of menus component.
    */
   _wrapperMenu() {
-    const { menus, dispatch } = this.props;
+    const { menus, dispatch, menuLists } = this.props;
     const actionCreators = bindActionCreators(ICDActions, dispatch);
-    const items = [
-      {
-        key: 'medical',
-        label: '就醫情況',
-        bsStyle: 'primary',
-      },
-      {
-        key: 'pedestrian',
-        label: '當事人（傷者）用路型態',
-        bsStyle: 'success',
-      },
-      {
-        key: 'pedestrianDetail',
-        label: '當事人（傷者）用路型態細分',
-        bsStyle: 'info',
-      },
-      {
-        key: 'perpetrator',
-        label: '對方用路型態',
-        bsStyle: 'warning',
-      },
-      {
-        key: 'accidentType',
-        label: '事故類型',
-        bsStyle: 'danger',
-      }
+    if (menus.isEmpty()) {
+      return null;
+    }
+    const colors = [
+      'primary',
+      'success',
+      'info',
+      'warning',
+      'danger',
     ];
+    let index = -1;
+    const items = _.map(menuLists, (value, key) => {
+      index++;
+      return {
+        key: key,
+        label: value,
+        bsStyle: colors[index % 5]
+      };
+    }).reverse();
     const wrapper = _.map(items, (item, key) => {
       return (
         <Col key={key}>
@@ -139,4 +163,4 @@ class Seeker extends React.Component {
   }
 }
 
-export default connect((state) => ({menus: state.menus, ICD:state.ICD}))(Seeker);
+export default connect((state) => ({menus: state.menus, ICD:state.ICD, root: state.root, menuLists: state.menuLists}))(Seeker);

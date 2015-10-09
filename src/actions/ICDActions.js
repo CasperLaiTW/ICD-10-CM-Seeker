@@ -7,9 +7,13 @@ import * as ICDConstants from '../constants/ICDConstants';
  * @return {dispatch}
  */
 export function loadRepo(root) {
-  return {
-    type: ICDConstants.DATA_UPDATE,
-    icd: Core
+  return (dispatch) => {
+    Core.setAccident(root).then(() => {
+      dispatch({
+        type: ICDConstants.DATA_UPDATE,
+        icd: Core,
+      });
+    });
   };
 }
 
@@ -20,13 +24,17 @@ export function loadRepo(root) {
  * @return {dispatch}
  */
 export function filter(key, value) {
-  const functionName = 'set' + _.capitalize(key);
-  const func = Core[functionName];
-  if (typeof func === 'function') func.call(Core, value);
+  return (dispatch) => {
+    const functionName = 'set' + _.capitalize(key);
+    const func = Core[functionName];
+    if (typeof func === 'function') {
+      func.call(Core, value);
+    }
 
-  return {
-    type:ICDConstants.DATA_UPDATE,
-    icd: Core,
+    return dispatch({
+      type:ICDConstants.DATA_UPDATE,
+      icd: Core,
+    });
   };
 }
 

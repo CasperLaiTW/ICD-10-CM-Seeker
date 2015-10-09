@@ -133,7 +133,6 @@ export default class SeekerMenu extends React.Component {
   _onChange(select) {
     const { filterKey, filter } = this.props;
     const { menu, list } = this.state;
-    // console.log(list);
     const current = list.find((v) => v.name === menu[select]);
     const value = list.findKey((v) => v.name === menu[select]);
     this.setState({

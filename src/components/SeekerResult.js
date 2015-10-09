@@ -20,11 +20,7 @@ export default class SeekerResult extends React.Component {
               <tr>
                 <th>Code</th>
                 <th>名稱</th>
-                <th>當事人(傷者)用路型態</th>
-                <th>當事人(傷者)用路型態細分</th>
-                <th>對方用路型態</th>
-                <th>事故類型</th>
-                <th>就醫情況</th>
+                {_.map(this.props.menuLists, (value, key) => <th key={key}>{value}</th>)}
               </tr>
             </thead>
             <tbody>
@@ -41,18 +37,15 @@ export default class SeekerResult extends React.Component {
    * @return {array} ReactDOM of table content.
    */
   _wrapper() {
-    const { result } = this.props;
+    const { result, menuLists } = this.props;
     let tbody = [];
     tbody = result.map((value, key) => {
+      const _concat = _.map(menuLists, (m, k) => <td key={k}>{value[k]}</td>)
       return (
         <tr key={key}>
           <td>{value.code}</td>
           <td>{value.content}</td>
-          <td>{value.pedestrian}</td>
-          <td>{value.pedestrianDetail}</td>
-          <td>{value.perpetrator}</td>
-          <td>{value.accidentType}</td>
-          <td>{value.medical}</td>
+          {_concat}
         </tr>
       );
     })

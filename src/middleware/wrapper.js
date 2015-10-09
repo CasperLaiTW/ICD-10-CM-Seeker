@@ -11,6 +11,7 @@ export default store => next => action => {
     store.dispatch({
       type: MenuConstants.DATA_UPDATE,
       data: action.icd.getConditionState(),
+      menusList: action.icd.menusList,
     });
     return next({
       type: ICDConstants.DATA_UPDATE,
