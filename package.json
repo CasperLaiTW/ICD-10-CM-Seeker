@@ -5,7 +5,7 @@
   "repository": "https://github.com/CasperLaiTW/ICD-10-CM-Seeker",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist/*",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.babel.js",
     "build": "npm run clean && cp node_modules/icd-10-cm-core/dist/*.json dist/ && npm run build:webpack",
     "start": "cp node_modules/icd-10-cm-core/dist/*.json dist/ && node -r babel/register devServer.js",
