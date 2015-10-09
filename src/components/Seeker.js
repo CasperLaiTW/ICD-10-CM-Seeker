@@ -72,7 +72,7 @@ class Seeker extends React.Component {
   _getStyles() {
     return {
       menuContainer: {
-        height: 'calc(100vh - 150px)',
+        height: 'calc(100vh - 250px)',
         overflow: 'auto',
       },
       resetContainer: {
@@ -106,7 +106,7 @@ class Seeker extends React.Component {
 
   _wrapperResult() {
     const { menus, dispatch, menuLists } = this.props;
-    if (_.isEmpty(menuLists)) {
+    if (_.isEmpty(menuLists) || this.props.ICD.size === 0) {
       return null;
     }
 
