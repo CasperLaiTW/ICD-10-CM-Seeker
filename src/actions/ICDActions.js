@@ -1,6 +1,7 @@
 import Core from 'icd-10-cm-core/dist/bundle';
 import _ from 'lodash';
 import * as ICDConstants from '../constants/ICDConstants';
+import * as AppConstants from '../constants/AppConstants';
 
 /**
  * Load ICD-10-CM json data.
@@ -8,10 +9,16 @@ import * as ICDConstants from '../constants/ICDConstants';
  */
 export function loadRepo(root) {
   return (dispatch) => {
-    Core.setAccident(root).then(() => {
+    dispatch({
+      type: AppConstants.APP_LOADING
+    });
+    return Core.setAccident(root).then(() => {
       dispatch({
         type: ICDConstants.DATA_UPDATE,
         icd: Core,
+      });
+      dispatch({
+        type: AppConstants.APP_LOADED
       });
     });
   };
